@@ -1,7 +1,0 @@
-package com.task.config;
-
-import org.springframework.web.filter.OncePerRequestFilter;
-
-public class JwtTokenValidatorFilter extends OncePerRequestFilter {
-
-}
