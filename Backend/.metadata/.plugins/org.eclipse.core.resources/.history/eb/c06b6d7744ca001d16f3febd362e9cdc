@@ -1,0 +1,11 @@
+package com.task.service;
+
+import com.task.entity.User;
+import com.task.exception.UserException;
+
+public interface UserService {
+
+	public User registerAUser(User user) throws UserException;
+	
+	
+}

@@ -1,0 +1,15 @@
+package com.task.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class User {
+
+	private Integer uid;
+	private String email;
+	private String name;
+	private String role;
+	
+	private List<Task> tasks=new ArrayList<>();
+	
+}

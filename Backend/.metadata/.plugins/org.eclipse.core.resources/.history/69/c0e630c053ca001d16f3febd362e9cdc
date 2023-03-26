@@ -1,0 +1,29 @@
+package com.task.service;
+
+import org.springframework.stereotype.Service;
+
+import com.task.entity.User;
+import com.task.exception.UserException;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Override
+	public User registerAUser(User user) throws UserException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User updateUser(User user) throws UserException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User getUserById(Integer uid) throws UserException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

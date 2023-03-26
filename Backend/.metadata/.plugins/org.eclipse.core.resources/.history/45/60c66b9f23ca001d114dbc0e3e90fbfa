@@ -1,0 +1,25 @@
+package com.task.entity;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import lombok.Data;
+
+@Entity
+@Data
+public class Sprint {
+
+	private Integer sid;
+	private String sprintName;
+	private LocalDate from;
+	private LocalDate to;
+	@JsonIgnoreProperties
+	@OneToMany(mappedBy = "sprint",cascade = CascadeType.ALL)
+	private List<Task> taskslist=new ArrayList<>();
+}

@@ -1,0 +1,61 @@
+package com.task.exception;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+	@ExceptionHandler(TaskException.class)
+	public ResponseEntity<MyError> taskExceptionHandler(TaskException te,WebRequest wreq){
+		MyError me=new MyError();
+		me.setTimestamp(LocalDateTime.now());
+		me.setMessage(te.getMessage());
+		me.setDescription(wreq.getDescription(false));
+		return new ResponseEntity<>(me,HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(UserException.class)
+	public ResponseEntity<MyError> userExceptionHandler(UserException te,WebRequest wreq){
+		MyError me=new MyError();
+		me.setTimestamp(LocalDateTime.now());
+		me.setMessage(te.getMessage());
+		me.setDescription(wreq.getDescription(false));
+		return new ResponseEntity<>(me,HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(SprintException.class)
+	public ResponseEntity<MyError> sprintExceptionHandler(SprintException te,WebRequest wreq){
+		MyError me=new MyError();
+		me.setTimestamp(LocalDateTime.now());
+		me.setMessage(te.getMessage());
+		me.setDescription(wreq.getDescription(false));
+		return new ResponseEntity<>(me,HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<Map<String,String>> validationExceptionHandler(MethodArgumentNotValidException me){
+		Map<String,String> hm=new HashMap<>();
+		me.getBindingResult().getFieldErrors().forEach(e->{
+			hm.put(e.getField(), e.getDefaultMessage());
+		});
+		return new ResponseEntity<>(hm,HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<MyErrorDetails> globalExceptionHandler(Exception be,WebRequest wr){
+		MyErrorDetails me=new MyErrorDetails();
+		me.setMessage(be.getMessage());
+		me.setTimestamp(LocalDateTime.now());
+		me.setDescription(wr.getDescription(false));
+		return new ResponseEntity<MyErrorDetails>(me,HttpStatus.BAD_REQUEST);
+	}
+}
